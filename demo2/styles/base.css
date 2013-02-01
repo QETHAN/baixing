@@ -1,0 +1,189 @@
+@charset "utf-8";
+/* 防止用户自定义背景颜色对网页的影响，添加让用户可以自定义字体 */
+html {
+    color: #fff;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+}
+
+/* 内外边距通常让各个浏览器样式的表现位置不同 */
+body, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input, textarea, p, blockquote, th, td, hr, button, article, aside, details, figcaption, figure, footer, header, group, menu, nav, section {
+    margin: 0;
+    padding: 0;
+}
+
+/* 重设 HTML5 标签, IE 需要在 js 中 createElement(TAG) */
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+    display: block;
+}
+
+/* HTML5 媒体文件跟 img 保持一致 */
+audio, canvas, video {
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+}
+
+/* 要注意表单元素并不继承父级 font 的问题 */
+body, button, input, select, textarea {
+    font: 14px/1.5 'Arial', sans-serif;
+}
+
+input, select, textarea {
+    vertical-align:middle;
+    color:#666;
+}
+button, input {*overflow: visible;line-height: normal;}
+button::-moz-focus-inner,input::-moz-focus-inner {padding:0;border:0;}
+
+/* 去掉各Table  cell 的边距并让其边重合 */
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+/* IE bug fixed: th 不继承 text-align*/
+th {
+    text-align: inherit;
+}
+
+/* 去除默认边框 */
+fieldset, img {
+    border: 0;
+}
+
+/* ie6 7 8(q) bug 显示为行内表现 */
+iframe {
+    display: block;
+}
+
+/* 块/段落引用 */
+blockquote {
+    margin: 1em 4em 1em 2em;
+    padding: 0.6em 1em;
+    background: #f1f1f1;
+}
+blockquote blockquote {
+    padding: 0 0 0 1em;
+    margin-left: 2em;
+    border-left: 0.4em solid #ddd;
+}
+
+address, caption, cite, code, den, em, th, var {
+    font-style: normal;
+    font-weight: 500;
+}
+
+/* 去掉列表前的标识, li 会继承，大部分网站通常用列表来很多内容，所以应该当去 */
+ul, ol {
+    list-style: none;
+}
+
+/* 对齐是排版最重要的因素, 别让什么都居中 */
+caption, th {
+    text-align: left;
+}
+
+/* 标题应该更贴紧内容，并与其他块区分，margin 值要相应做优化 */
+h1, h2, h3, h4, h5, h6 {
+    font:500 100%/1 Arial, sans-serif;
+    font-weight:700\9; /* todo: make some font-family detection */
+}
+
+q:before, q:after {
+    content: '';
+}
+
+/* 统一上标和下标 */
+sub, sup {
+    font-size: 75%;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline;
+}
+sup {
+    top: -0.5em;
+}
+sub {
+    bottom: -0.25em;
+}
+
+a{color:#06c;}
+
+/* 让链接在 hover 状态下显示下划线 */
+a:hover {
+    color:#f50;
+    text-decoration: underline;
+}
+
+/* 默认不显示下划线，保持页面简洁 */
+ins, a {
+    text-decoration: none;
+}
+
+pre, code {
+    font-family: 'Courier New', serif;
+}
+pre {
+    border: 1px solid #ddd;
+    border-left-width: 0.4em;
+    background: #fbfbfb;
+    padding: 10px;
+}
+/* 底部印刷体、版本等标记 */
+small {
+    font-size: 12px;
+    color: #888;
+}
+
+/* 去虚线框 */
+:focus{outline:none;}
+
+/* 清理浮动 */
+.clearfix:after {
+    visibility:hidden;
+    display:block;
+    font-size:0;
+    content:" ";
+    clear:both;
+    height:0;
+}
+.clearfix {
+    zoom:1; /* for IE6 IE7 */
+}
+.hide {display: none;}
+.show{display: block;}
+.invisible {visibility: hidden;}
+
+body{ min-width:1000px}
+
+.wrapper{margin:0 auto;width:980px;zoom:1;}
+
+/* grid system */
+.ui-grid-1,.ui-grid-2,.ui-grid-3,.ui-grid-4,.ui-grid-5,.ui-grid-6,.ui-grid-7,.ui-grid-8,.ui-grid-9,.ui-grid-10,.ui-grid-11,.ui-grid-12,.ui-grid-13,.ui-grid-14,.ui-grid-15,.ui-grid-16,.ui-grid-17,.ui-grid-18,.ui-grid-19,.ui-grid-20,.ui-grid-21,.ui-grid-22,.ui-grid-23,.ui-grid-24,.ui-grid-25{margin:0  0 0 20px;float:left;display:inline}
+.ui-grid-1{width:30px}
+.ui-grid-2{width:80px}
+.ui-grid-3{width:130px}
+.ui-grid-4{width:180px}
+.ui-grid-5{width:230px}
+.ui-grid-6{width:280px}
+.ui-grid-7{width:330px}
+.ui-grid-8{width:380px}
+.ui-grid-9{width:430px}
+.ui-grid-10{width:480px}
+.ui-grid-11{width:530px}
+.ui-grid-12{width:580px}
+.ui-grid-13{width:630px}
+.ui-grid-14{width:680px}
+.ui-grid-15{width:730px}
+.ui-grid-16{width:780px}
+.ui-grid-17{width:830px}
+.ui-grid-18{width:880px}
+.ui-grid-19{width:930px}
+.ui-grid-20{width:980px}
+
+.sl-inline-block {
+    display: inline-block;
+    *display: inline;
+    *zoom:1;
+}

@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>百姓网测试</title>
+    <script type="text/javascript" src="../javascript/event.js"></script>
+    <style type="text/css">
+        .over,.enter{
+            background-color:lightgray;
+            padding:20px;
+            width:40%;
+        }
+        .over{
+            float:left;
+        }
+        .enter{
+            float: right;
+        }
+        .over h2,.enter h2{
+            background-color:white;
+        }
+    </style>
+</head>
+<body>
+<p>不论鼠标指针穿过被选元素或其子元素，都会触发 mouseover 事件。</p>
+<p>只有在鼠标指针穿过被选元素时，才会触发 mouseenter 事件。</p>
+<div id="over"  class="over"><h2>被触发的 Mouseover 事件：<span id="oNum"></span></h2>
+</div>
+<div id="enter" class="enter"><h2>被触发的 Mouseenter 事件：<span id="eNum"></span></h2>
+</div>
+<script type="text/javascript">
+    x=0;
+    y=0;
+    var e1= $.byId("over"),e2=$.byId("enter");
+    eventUtil.addHandler(e1,"mouseover",function(){
+        $.byId("oNum").innerHTML=(x+=1);
+    });
+    eventUtil.addMouseEnterLeave(e2,"mouseenter",function(){
+        $.byId("eNum").innerHTML=(y+=1);
+    })
+</script>
+</body>
+
+</html>

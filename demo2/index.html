@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>HTML5 文件上传</title>
+<link rel="stylesheet" href="styles/base.css" type="text/css"/>
+<!--[if lt IE 9]>
+<script src="dist/html5shiv.js"></script>
+<![endif]-->
+<style type="text/css">
+    body {
+        background-color: #515151;
+        width: 100%;
+        height: 100%;
+    }
+    #dropbox {
+        border: 10px dashed #ccc;
+        position: absolute;
+        width: 500px;
+        height: 350px;
+        left: 50%;
+        top: 50%;
+        margin-left: -250px;
+        margin-top: -175px;
+        text-align: center;
+    }
+    #dropbox.hover {
+        border: 10px dashed #333;
+    }
+    #holder {
+        display: none;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+    }
+    .message {
+        color: #999;
+        margin-top:150px;
+        line-height: 25px;
+    }
+</style>
+</head>
+<body>
+    <div id="dropbox">
+        <p id="message" class="message">拖动图片上传（需浏览器支持） </p>
+    </div>
+    <div id="holder">
+       请选择文件上传： <input  type="file" name="file">
+    </div>
+    <script type="text/javascript">
+        var dropbox = document.getElementById('dropbox'),
+                message = document.getElementById('message'),
+                holder = document.getElementById('holder'),
+                dropboxWidth,dropboxHeight;
+
+        if(!(document.all && window.external)){
+            dropboxWidth = window.getComputedStyle(dropbox, null).getPropertyValue('width'),
+            dropboxHeight = window.getComputedStyle(dropbox, null).getPropertyValue('height');
+        }else{
+            dropboxHeight=dropbox.currentStyle.height;
+            dropboxWidth=dropbox.currentStyle.width;
+        }
+        if (typeof window.FileReader === 'undefined') {
+            //兼容方案
+            alert("no");
+            holder.style.display = "block";
+            dropbox.style.display = "none";
+        }
+
+        dropbox.addEventListener('dragover', function (e) {
+            this.className = 'hover';
+            e.preventDefault();
+        }, false);
+        dropbox.addEventListener('dragleave', function(e) {
+            this.className = '';
+            e.preventDefault();
+        }, false);
+        dropbox.addEventListener('dragend', function (e) {
+            this.className = '';
+            e.preventDefault();
+        }, false);
+        dropbox.addEventListener('drop', function (e) {
+            this.className = '';
+            e.preventDefault();
+
+            var file = e.dataTransfer.files[0],
+                    reader = new FileReader();
+            if(!/image\/\w+/.test(file.type)){
+                alert("请确保文件为图像类型");
+                return false;
+            }
+            reader.onload = function (event) {
+                dropbox.style.background = 'url(' + event.target.result + ') no-repeat center transparent padding-box';
+                dropbox.style.backgroundSize = dropboxWidth + ' ' + dropboxHeight;
+                message.style.display = 'none';
+            };
+            reader.readAsDataURL(file);
+
+        }, false);
+    </script>
+</body>
+</html>
+
