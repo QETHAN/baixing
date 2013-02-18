@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8">
+	<meta charset="UTF-8">
 	<title>搜狐JavaScript面试题</title>
 	<script type="text/javascript" src="jquery.js"></script>
 </head>
@@ -70,6 +70,144 @@ try{
 
         a: "4"
         c: "6"
+
+        ------------------*/
+        
+}catch(e){
+        console.error("执行出错，错误信息: " + e);
+}
+
+
+//实现一个叫Man的类，包含attr, words, say三个方法。
+var Man;
+//+++++++++++答题区域+++++++++++
+	Man=function(o){
+	  if (!(this instanceof Man)) {
+            // Man方法作为普通函数被调用
+            return new Man(o);
+        }
+        else {
+            // Man方法作为构造函数被调用
+            this.attr(o);
+        }
+	}
+
+	Man.prototype.attr=function(attrName,val){
+		var defaultVal="<用户未输入>",that=this;
+		if(typeof attrName ==="object"){
+			for(var i in attrName){
+				that.attr(i,attrName[i]);
+			}
+		}else{
+			attrName = '_' + attrName;
+
+            // 设置参数的值
+			if(arguments.length===2){
+				that[attrName]=val;
+			}
+			var r = this[attrName];
+            if (r === undefined || r === null)
+            r = defaultVal;
+            return r;
+		}
+
+	},
+	Man.prototype.words=function(content){
+		 var w = this._wordArray;
+		 if(!w) {
+		 	this._wordArray = w = [];
+		 }else{
+
+		 if(typeof content === "string") {
+		 	this._wordArray.push(content);
+		 }
+		}
+	}
+
+	Man.prototype.say=function(){
+		 var tmpArr = [], 
+		 	 wordsArr = this._wordArray,
+           	 limit = parseInt(this.attr('words-limit'), 10),
+             len = wordsArr.length;
+
+
+          	if(isNaN(limit)) return false;
+          	limit = limit > len ? len : limit;
+            for(var i=0; i<limit; i++) {
+                tmpArr[i] = wordsArr[i];
+            }
+            return this.attr('fullname') + this.attr('words-emote') + '："' + tmpArr.join('') + '"';
+        }		
+//+++++++++++答题结束+++++++++++
+
+try{
+        
+        var me = Man({ fullname: "小红" });
+        var she = new Man({ fullname: "小红" });
+        
+        console.group();
+        console.info("我的名字是：" + me.attr("fullname") + "\n我的性别是：" + me.attr("gender"));
+        console.groupEnd();
+        /*------[执行结果]------
+
+        我的名字是：小红
+        我的性别是：<用户未输入>
+
+        ------------------*/
+
+        me.attr("fullname", "小明");
+        me.attr("gender", "男");
+        me.fullname = "废柴";// private
+        me.gender = "人妖"; //private 
+        she.attr("gender", "女");
+        
+        console.group();
+        console.info("我的名字是：" + me.attr("fullname") + "\n我的性别是：" + me.attr("gender"));
+        console.groupEnd();
+        /*------[执行结果]------
+
+        我的名字是：小明
+        我的性别是：男
+
+        ------------------*/
+        
+        console.group();
+        console.info("我的名字是：" + she.attr("fullname") + "\n我的性别是：" + she.attr("gender"));
+        console.groupEnd();
+        /*------[执行结果]------
+
+        我的名字是：小红
+        我的性别是：女
+
+        ------------------*/
+
+        me.attr({
+                "words-limit": 3,
+                "words-emote": "微笑"
+        });
+        me.words("我喜欢看视频。");
+        me.words("我们的办公室太漂亮了。");
+        me.words("视频里美女真多！");
+        me.words("我平时都看优酷！");
+        
+        console.group();
+        console.log(me.say());
+        /*------[执行结果]------
+
+        小明微笑："我喜欢看视频。我们的办公室太漂亮了。视频里美女真多！"
+
+        ------------------*/
+
+        me.attr({
+                "words-limit": 2,
+                "words-emote": "喊"
+        });
+
+        console.log(me.say());
+        console.groupEnd();
+        /*------[执行结果]------
+
+        小明喊："我喜欢看视频。我们的办公室太漂亮了。"
 
         ------------------*/
         
